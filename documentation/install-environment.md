@@ -932,3 +932,7 @@ token=eyJhbGciOiJ....
 You should be able to login into to dashboard.
 
 ![k8s_dashboard_namespaces.png](images/k8s_dashboard_namespaces.png)
+
+
+Vous devriez maintenant suivre les étapes
+[ici pour la partie service-mesh](service-mesh.md).
