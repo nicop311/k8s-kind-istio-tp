@@ -93,6 +93,11 @@ topology, you can customize your `docker` installation **BEFORE** instaling
 
 Customize your docker installation:
 
+* [dockerd daemon configuration](https://docs.docker.com/engine/reference/commandline/dockerd/)
+* https://serverfault.com/questions/916941/configuring-docker-to-not-use-the-172-17-0-0-range
+
+For example, use this dockerd daemon configuration:
+
 ```bash
 $ sudo su
 $ mkdir /etc/docker
@@ -101,12 +106,27 @@ $ touch daemon.json
 
 $ cat <<EOF > /etc/docker/daemon.json
 {
-  "bip": "192.168.10.5/24",
-  "fixed-cidr": "192.168.10.5/25",
-  "fixed-cidr-v6": "2001:db8::/64",
-  "default-gateway": "192.168.10.1",
-  "default-gateway-v6": "2001:db8:abcd::89",
-  "dns": ["8.8.8.8", "8.8.4.4"]
+  "bip": "10.200.0.1/24",
+  "default-address-pools":[
+    {"base":"10.201.0.0/16","size":24},
+    {"base":"10.202.0.0/16","size":24},
+    {"base":"10.203.0.0/16","size":24},
+    {"base":"10.204.0.0/16","size":24},
+    {"base":"10.205.0.0/16","size":24}
+  ],
+  "default-gateway": "",
+  "default-gateway-v6": "",
+  "dns": [
+    "1.1.1.1"
+    ],
+  "dns-opts": [
+    "8.8.8.8",
+    "8.8.4.4"
+  ],
+  "dns-search": [
+    "yourdomain.net"
+  ],
+  "selinux-enabled": false
 }
 EOF
 ```
